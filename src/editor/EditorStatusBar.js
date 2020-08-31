@@ -50,7 +50,8 @@ define(function (require, exports, module) {
         CommandManager       = require("command/CommandManager"),
         Commands             = require("command/Commands"),
         DocumentManager      = require("document/DocumentManager"),
-        StringUtils          = require("utils/StringUtils");
+        StringUtils          = require("utils/StringUtils"),
+        HealthLogger         = require("utils/HealthLogger");
     
     var SupportedEncodingsText = require("text!supported-encodings.json"),
         SupportedEncodings = JSON.parse(SupportedEncodingsText);
@@ -174,6 +175,13 @@ define(function (require, exports, module) {
             selStr = "";
 
         if (sels.length > 1) {
+            //Send analytics data for multicursor use
+            HealthLogger.sendAnalyticsData(
+                "multiCursor",
+                "usage",
+                "multiCursor",
+                "use"
+            );
             selStr = StringUtils.format(Strings.STATUSBAR_SELECTION_MULTIPLE, sels.length);
         } else if (editor.hasSelection()) {
             var sel = sels[0];
@@ -456,6 +464,18 @@ define(function (require, exports, module) {
         languageSelect.on("select", function (e, lang) {
             var document = EditorManager.getActiveEditor().document,
                 fullPath = document.file.fullPath;
+
+            var fileType = (document.file instanceof InMemoryFile) ? "newFile" : "existingFile",
+                filelanguageName = lang ? lang._name : "";
+
+            HealthLogger.sendAnalyticsData(
+                HealthLogger.commonStrings.USAGE + HealthLogger.commonStrings.LANGUAGE_CHANGE
+                + filelanguageName + fileType,
+                HealthLogger.commonStrings.USAGE,
+                HealthLogger.commonStrings.LANGUAGE_CHANGE,
+                filelanguageName.toLowerCase(),
+                fileType
+            );
 
             if (lang === LANGUAGE_SET_AS_DEFAULT) {
                 // Set file's current language in preferences as a file extension override (only enabled if not default already)

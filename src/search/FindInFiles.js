@@ -148,7 +148,7 @@ define(function (require, exports, module) {
         while ((match = queryExpr.exec(contents)) !== null) {
             lineNum          = StringUtils.offsetToLineNum(lines, match.index);
             line             = lines[lineNum];
-            ch               = match.index - contents.lastIndexOf("\n", match.index) - 1;  // 0-based index
+            ch               = match.index - contents.lastIndexOf("\n", match.index - 1) - 1;  // 0-based index
             matchedLines     = match[0].split("\n");
             numMatchedLines  = matchedLines.length;
             totalMatchLength = match[0].length;
@@ -945,7 +945,7 @@ define(function (require, exports, module) {
 
 
     /**
-     * Gets the next page of search recults to append to the result set.
+     * Gets the next page of search results to append to the result set.
      * @return {object} A promise that's resolved with the search results or rejected when the find competes.
      */
     function getNextPageofSearchResults() {

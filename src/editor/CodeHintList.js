@@ -150,6 +150,10 @@ define(function (require, exports, module) {
 
             $item.find("a").addClass("highlight");
             ViewUtils.scrollElementIntoView($view, $item, false);
+
+            if (this.handleHighlight) {
+                this.handleHighlight($item.find("a"), this.$hintMenu.find("#codehint-desc"));
+            }
         }
     };
 
@@ -187,6 +191,7 @@ define(function (require, exports, module) {
 
         this.hints = hintObj.hints;
         this.hints.handleWideResults = hintObj.handleWideResults;
+        this.enableDescription = hintObj.enableDescription;
 
         // if there is no match, assume name is already a formatted jQuery
         // object; otherwise, use match to format name for display.
@@ -261,6 +266,13 @@ define(function (require, exports, module) {
             // attach to DOM
             $parent.append($ul);
 
+            // If a a description field requested attach one
+            if (this.enableDescription) {
+                // Remove the desc element first to ensure DOM order
+                $parent.find("#codehint-desc").remove();
+                $parent.append("<div id='codehint-desc' class='dropdown-menu quiet-scrollbars'></div>");
+                $ul.addClass("withDesc");
+            }
             this._setSelectedIndex(selectInitial ? 0 : -1);
         }
     };
@@ -279,7 +291,9 @@ define(function (require, exports, module) {
             textHeight  = this.editor.getTextHeight(),
             $window     = $(window),
             $menuWindow = this.$hintMenu.children("ul"),
-            menuHeight  = $menuWindow.outerHeight();
+            $descElement = this.$hintMenu.find("#codehint-desc"),
+            descOverhang = $descElement.length === 1 ? $descElement.height() : 0,
+            menuHeight  = $menuWindow.outerHeight() + descOverhang;
 
         // TODO Ty: factor out menu repositioning logic so code hints and Context menus share code
         // adjust positioning so menu is not clipped off bottom or right
@@ -299,6 +313,13 @@ define(function (require, exports, module) {
             // Right overhang is negative
             availableWidth = menuWidth + Math.abs(rightOverhang);
         }
+
+        //Creating the offset element for hint description element
+        var descOffset = this.$hintMenu.find("ul.dropdown-menu")[0].getBoundingClientRect().height;
+        if (descOffset === 0) {
+            descOffset = menuHeight - descOverhang;
+        }
+        this.$hintMenu.find("#codehint-desc").css("margin-top", descOffset - 1);
 
         return {left: posLeft, top: posTop, width: availableWidth};
     };
@@ -542,6 +563,15 @@ define(function (require, exports, module) {
      */
     CodeHintList.prototype.onSelect = function (callback) {
         this.handleSelect = callback;
+    };
+
+    /**
+      * Set the hint list highlight callback function
+      *
+      * @param {Function} callback
+      */
+    CodeHintList.prototype.onHighlight = function (callback) {
+        this.handleHighlight = callback;
     };
 
     /**

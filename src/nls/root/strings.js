@@ -66,6 +66,9 @@ define({
     "ERROR_RENAMING_FILE_TITLE"         : "Error Renaming {0}",
     "ERROR_RENAMING_FILE"               : "An error occurred when trying to rename the {2} <span class='dialog-filename'>{0}</span>. {1}",
     "ERROR_RENAMING_NOT_IN_PROJECT"     : "The file or directory is not part of the currently opened project. Unfortunately, only project files can be renamed at this point.",
+    "ERROR_MOVING_FILE_TITLE"           : "Error Moving {0}",
+    "ERROR_MOVING_FILE"                 : "An error occurred when trying to move the {2} <span class='dialog-filename'>{0}</span>. {1}",
+    "ERROR_MOVING_NOT_IN_PROJECT"       : "Cannot move the file/folder, as they are not part of the current project.",
     "ERROR_DELETING_FILE_TITLE"         : "Error Deleting {0}",
     "ERROR_DELETING_FILE"               : "An error occurred when trying to delete the {2} <span class='dialog-filename'>{0}</span>. {1}",
     "INVALID_FILENAME_TITLE"            : "Invalid {0}",
@@ -138,6 +141,10 @@ define({
     "EXT_MODIFIED_WARNING"              : "<span class='dialog-filename'>{0}</span> has been modified on disk outside of {APP_NAME}.<br /><br />Do you want to save the file and overwrite those changes?",
     "EXT_MODIFIED_MESSAGE"              : "<span class='dialog-filename'>{0}</span> has been modified on disk outside of {APP_NAME}, but also has unsaved changes in {APP_NAME}.<br /><br />Which version do you want to keep?",
     "EXT_DELETED_MESSAGE"               : "<span class='dialog-filename'>{0}</span> has been deleted on disk outside of {APP_NAME}, but has unsaved changes in {APP_NAME}.<br /><br />Do you want to keep your changes?",
+    
+    // Window unload warning messages
+    "WINDOW_UNLOAD_WARNING"                      : "Are you sure you want to navigate to a different URL and leave Brackets?",
+    "WINDOW_UNLOAD_WARNING_WITH_UNSAVED_CHANGES" : "You have unsaved changes! Are you sure you want to navigate to a different URL and leave Brackets?",
 
     // Generic dialog/button labels
     "DONE"                              : "Done",
@@ -405,12 +412,14 @@ define({
     "CMD_WORKINGSET_SORT_BY_TYPE"         : "Sort by Type",
     "CMD_WORKING_SORT_TOGGLE_AUTO"        : "Automatic Sort",
     "CMD_THEMES"                          : "Themes\u2026",
+    "CMD_TOGGLE_SEARCH_AUTOHIDE"          : "Automatically close search",
 
     // Navigate menu commands
     "NAVIGATE_MENU"                       : "Navigate",
     "CMD_QUICK_OPEN"                      : "Quick Open",
     "CMD_GOTO_LINE"                       : "Go to Line",
     "CMD_GOTO_DEFINITION"                 : "Quick Find Definition",
+    "CMD_GOTO_DEFINITION_PROJECT"         : "Quick Find Definition in Project",
     "CMD_GOTO_FIRST_PROBLEM"              : "Go to First Problem",
     "CMD_TOGGLE_QUICK_EDIT"               : "Quick Edit",
     "CMD_TOGGLE_QUICK_DOCS"               : "Quick Docs",
@@ -449,6 +458,7 @@ define({
     "EXPERIMENTAL_BUILD"                   : "experimental build",
     "RELEASE_BUILD"                        : "build",
     "DEVELOPMENT_BUILD"                    : "development build",
+    "PRERELEASE_BUILD"                     : "prerelease build",
     "RELOAD_FROM_DISK"                     : "Reload from Disk",
     "KEEP_CHANGES_IN_EDITOR"               : "Keep Changes in Editor",
     "CLOSE_DONT_SAVE"                      : "Close (Don't Save)",
@@ -641,10 +651,10 @@ define({
     // extensions/default/HealthData
     "HEALTH_DATA_NOTIFICATION"                  : "Health Report Preferences",
     "HEALTH_FIRST_POPUP_TITLE"                  : "{APP_NAME} Health Report",
-    "HEALTH_DATA_DO_TRACK"                      : "Share anonymous information on how I use {APP_NAME}",
-    "HEALTH_DATA_NOTIFICATION_MESSAGE"          : "In order to improve {APP_NAME}, we periodically send limited, <strong>anonymous</strong> statistics to Adobe about how you use {APP_NAME}. This information helps prioritize features, find bugs, and spot usability issues.<br><br>You can see your data or choose not to share data by selecting <strong>Help > Health Report</strong>.<br><br><a href='https://github.com/adobe/brackets/wiki/Health-Data'>Learn more about {APP_NAME} Health Report</a>",
+    "HEALTH_DATA_DO_TRACK"                      : "Share pseudonymous information on how I use {APP_NAME}",
+    "HEALTH_DATA_NOTIFICATION_MESSAGE"          : "In order to improve {APP_NAME}, we periodically send limited, <strong>pseudonymous</strong> statistics to Adobe about how you use {APP_NAME}. This information helps prioritize features, find bugs, and spot usability issues.<br><br>You can see your data or choose not to share data by selecting <strong>Help > Health Report</strong>.<br><br><a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>Learn more about {APP_NAME} Health Report</a>",
     "HEALTH_DATA_PREVIEW"                       : "{APP_NAME} Health Report",
-    "HEALTH_DATA_PREVIEW_INTRO"                 : "<p>In order to improve {APP_NAME}, we periodically send limited, <strong>anonymous</strong> statistics to Adobe about how you use {APP_NAME}. This information helps prioritize features, find bugs, and spot usability issues. <a href='https://github.com/adobe/brackets/wiki/Health-Data'>Learn more about {APP_NAME} Health Report</a> and how it benefits the {APP_NAME} community while protecting your privacy.</p><p>Below is a preview of the data that will be sent in your next Health Report <em>if</em> it is enabled.</p>",
+    "HEALTH_DATA_PREVIEW_INTRO"                 : "<p>In order to improve {APP_NAME}, we periodically send limited, <strong>pseudonymous</strong> statistics to Adobe about how you use {APP_NAME}. This information helps prioritize features, find bugs, and spot usability issues. <a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>Learn more about {APP_NAME} Health Report</a> and how it benefits the {APP_NAME} community while protecting your privacy.</p><p>Below is a preview of the data that will be sent in your next Health Report <em>if</em> it is enabled.</p>",
 
     // extensions/default/InlineTimingFunctionEditor
     "INLINE_TIMING_EDITOR_TIME"                 : "Time",
@@ -669,6 +679,31 @@ define({
     "NO_ARGUMENTS"                              : "<no parameters>",
     "DETECTED_EXCLUSION_TITLE"                  : "JavaScript File Inference Problem",
     "DETECTED_EXCLUSION_INFO"                   : "{APP_NAME} ran into trouble processing <span class='dialog-filename'>{0}</span>.<br><br>This file will no longer be processed for code hints, Jump to Definition or Quick Edit. To re-enable this file, open <code>.brackets.json</code> in your project and edit <code>jscodehints.detectedExclusions</code>.<br><br>This is likely a {APP_NAME} bug. If you can provide a copy of this file, please <a href='https://github.com/adobe/brackets/wiki/How-to-Report-an-Issue'>file a bug</a> with a link to the file named here.",
+
+    // extensions/default/JavascriptRefactoring
+    "CMD_REFACTOR"                              : "Refactor",
+    "CMD_EXTRACTTO_VARIABLE"                    : "Extract to Variable",
+    "CMD_EXTRACTTO_FUNCTION"                    : "Extract to Function",
+    "ERROR_TERN_FAILED"                         : "Unable to get data from Tern",
+    "ERROR_EXTRACTTO_VARIABLE_NOT_VALID"        : "Selection does not form an expression",
+    "ERROR_EXTRACTTO_FUNCTION_NOT_VALID"        : "Selected block should represent set of statements or an expression",
+    "ERROR_EXTRACTTO_VARIABLE_MULTICURSORS"     : "Extract to Variable does not work in multicursors",
+    "ERROR_EXTRACTTO_FUNCTION_MULTICURSORS"     : "Extract to Function does not work in multicursors",
+    "EXTRACTTO_FUNCTION_SELECT_SCOPE"           : "Choose destination scope",
+    "EXTRACTTO_VARIABLE_SELECT_EXPRESSION"      : "Select an expression",
+    "CMD_REFACTORING_RENAME"                    : "Rename",
+    "CMD_REFACTORING_TRY_CATCH"                 : "Wrap in Try Catch",
+    "CMD_REFACTORING_CONDITION"                 : "Wrap in Condition",
+    "CMD_REFACTORING_GETTERS_SETTERS"           : "Create Getters/Setters",
+    "CMD_REFACTORING_ARROW_FUNCTION"            : "Convert to Arrow Function",
+    "DESCRIPTION_CODE_REFACTORING"              : "Enable/disable JavaScript Code Refactoring",
+    "ERROR_TRY_CATCH"                           : "Select valid code to wrap in a Try-catch block",
+    "ERROR_WRAP_IN_CONDITION"                   : "Select valid code to wrap in a Condition block",
+    "ERROR_ARROW_FUNCTION"                      : "Place the cursor inside a function expression",
+    "ERROR_GETTERS_SETTERS"                     : "Place the cursor at a member of an object expression",
+    "ERROR_RENAME_MULTICURSOR"                  : "Cannot rename when using multi-cursors",
+    "ERROR_RENAME_QUICKEDIT"                    : "Cannot rename this identifier, as it is referenced elsewhere outside this function",
+    "ERROR_RENAME_GENERAL"                      : "Cannot rename selected text",
 
     // extensions/default/JSLint
     "JSLINT_NAME"                               : "JSLint",
@@ -784,6 +819,7 @@ define({
     "DESCRIPTION_USE_TAB_CHAR"                       : "true to use tabs instead of spaces",
     "DESCRIPTION_UPPERCASE_COLORS"                   : "true to generate uppercase hex colors in Inline Color Editor",
     "DESCRIPTION_WORD_WRAP"                          : "Wrap lines that exceed the viewport width",
+    "DESCRIPTION_SEARCH_AUTOHIDE"                    : "Close the search as soon as the editor is focused",
     "DESCRIPTION_DETECTED_EXCLUSIONS"                : "A list of files that have been detected to cause Tern to run out of control",
     "DESCRIPTION_INFERENCE_TIMEOUT"                  : "The amount of time after which Tern will time out when trying to understand files",
     "DESCRIPTION_SHOW_ERRORS_IN_STATUS_BAR"          : "true to show errors in status bar",
@@ -807,5 +843,74 @@ define({
     "DESCRIPTION_INDENT_LINE_COMMENT"                : "true to enable indenting of line comments",
     "DESCRIPTION_RECENT_FILES_NAV"                   : "Enable/disable navigation in recent files",
     "DESCRIPTION_LIVEDEV_WEBSOCKET_PORT"             : "Port on which WebSocket Server runs for Live Preview",
-    "DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS"        : "Live Preview Highlight settings"
+    "DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS"        : "Live Preview Highlight settings",
+    "DESCRIPTION_LIVEDEV_ENABLE_REVERSE_INSPECT"     : "false to disable live preview reverse inspect",
+    
+    // Strings for Auto Update
+    "DOWNLOAD_FAILED"                                : "Download failed.",
+    "DOWNLOAD_COMPLETE"                              : "Download complete!",
+    "UPDATE_SUCCESSFUL"                              : "Update successful!",
+    "UPDATE_FAILED"                                  : "Update failed!",
+    "VALIDATION_FAILED"                              : "Validation failed!",
+    "INITIALISATION_FAILED"                          : "Initialization failed!",
+    "CLEANUP_FAILED"                                 : "Clean-up failed!",
+    "WARNING_TYPE"                                   : "Warning!",
+    "CLICK_RESTART_TO_UPDATE"                        : "Click Restart to update Brackets.",
+    "UPDATE_ON_NEXT_LAUNCH"                          : "The update will be applied on relaunch.",
+    "GO_TO_SITE"                                     : "Go to <a href = \"http://brackets.io/\"> brackets.io </a> to retry.",
+    "INTERNET_UNAVAILABLE"                           : "No Internet connection available.",
+    "UPDATEDIR_READ_FAILED"                          : "Update directory could not be read.",
+    "UPDATEDIR_CLEAN_FAILED"                         : "Update directory could not be cleaned.",
+    "INITIAL_DOWNLOAD"                               : "Downloading Update...",
+    "RETRY_DOWNLOAD"                                 : "Download failed. Retrying...Attempt ",
+    "VALIDATING_INSTALLER"                           : "Download complete! Validating Installer...",
+    "CHECKSUM_DID_NOT_MATCH"                         : "Checksum didn't match.",
+    "INSTALLER_NOT_FOUND"                            : "Installer not found.",
+    "DOWNLOAD_ERROR"                                 : "Error occurred while downloading.",
+    "NETWORK_SLOW_OR_DISCONNECTED"                   : "Network is disconnected or too slow.",
+    "RESTART_BUTTON"                                 : "Restart",
+    "LATER_BUTTON"                                   : "Later",
+    "DESCRIPTION_AUTO_UPDATE"                        : "Enable/disable Brackets Auto-update",
+    "AUTOUPDATE_ERROR"                               : "Error!",
+    "AUTOUPDATE_IN_PROGRESS"                         : "An update is already in progress.",
+
+    "NUMBER_WITH_PERCENTAGE"                         : "{0}%",
+    // Strings for Related Files
+    "CMD_FIND_RELATED_FILES"                         : "Find Related Files",
+
+    ///String for Php Tooling Extensions
+    "PHP_VERSION_INVALID"                            : "Error parsing PHP version. Please check the output of the “php –version” command.",
+    "PHP_UNSUPPORTED_VERSION"                        : "Install PHP7 runtime for enabling PHP-related tooling such as Code Hints, Parameter Hints, Jump To Definition and more. Version found: {0}",
+    "PHP_EXECUTABLE_NOT_FOUND"                       : "PHP runtime not found. Install the PHP7 runtime and update “executablePath” in PHP Preferences appropriately. This enables PHP-related tooling such as Code Hints, Parameter Hints, Jump To Definition and more.",
+    "PHP_PROCESS_SPAWN_ERROR"                        : "Error code {0} encountered while starting the PHP process.",
+    "PHP_SERVER_ERROR_TITLE"                         : "Error",
+    "PHP_SERVER_MEMORY_LIMIT_INVALID"                : "The memory limit you provided is invalid. Review the PHP preferences to set the correct value.",
+    "DESCRIPTION_PHP_TOOLING_CONFIGURATION"          : "PHP Tooling default configuration settings",
+    "OPEN_PREFERENNCES"                              : "Open Preferences",
+
+    //Strings for LanguageTools Preferences
+    "LANGUAGE_TOOLS_PREFERENCES"                     : "Preferences for Language Tools",
+
+    "FIND_ALL_REFERENCES"                            : "Find All References",
+    "REFERENCES_IN_FILES"                            : "references",
+    "REFERENCE_IN_FILES"                             : "reference",
+    "REFERENCES_NO_RESULTS"                          : "No References available for current cursor position",
+
+    "CMD_FIND_DOCUMENT_SYMBOLS"                      : "Find Document Symbols",
+    "CMD_FIND_PROJECT_SYMBOLS"                       : "Find Project Symbols",
+
+   // Remote debugging enabled
+    "REMOTE_DEBUGGING_ENABLED"                       : "Remote debugging enabled on localhost:",
+
+   // Remote debugging port argument is invalid
+    "REMOTE_DEBUGGING_PORT_INVALID"                  : "Cannot enable remote debugging on port {0}. Port numbers should be between {1} and {2}.",
+    
+    //Associate File Type to External App
+    "DESCRIPTION_EXTERNAL_APPLICATION_ASSOCIATE"     : "Mappings for file extension to external applications. Syntax: \"<file_type>\": \"<default|applicationName|ApplicationPath>\", Use \"default\" to open files in system default application for the file type.",
+
+    "ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_TITLE"   : "Open Graphic Files in External Editors.",
+    "ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_MSG"     : "Your current folder has graphic file types which are not supported by {APP_NAME}.<br/>You can now associate specific file types with external editors. Once associated, you can open graphic files like .xd, .psd, .jpg, .png, .ai, .svg in their default applications by double clicking on the files in File Tree.<br/><br/>Please click on ‘Ok’ button to associate the graphic file types with their respective default applications.",
+    "ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_CNF_MSG" : "Following file types have been successfully associated with default applications.<br/>{0} You have the option to change your preference on whether you delete/add new file type associations in brackets.json by going to “Debug->Open Preferences File” menu."
+
+
 });

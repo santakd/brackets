@@ -96,7 +96,8 @@ define(function LiveDevelopment(require, exports, module) {
         StringUtils          = require("utils/StringUtils"),
         UserServer           = require("LiveDevelopment/Servers/UserServer").UserServer,
         WebSocketTransport   = require("LiveDevelopment/transports/WebSocketTransport"),
-        PreferencesManager   = require("preferences/PreferencesManager");
+        PreferencesManager   = require("preferences/PreferencesManager"),
+        HealthLogger         = require("utils/HealthLogger");
 
     // Inspector
     var Inspector       = require("LiveDevelopment/Inspector/Inspector");
@@ -200,6 +201,10 @@ define(function LiveDevelopment(require, exports, module) {
     
     PreferencesManager.definePreference("livedev.wsPort", "number", 8125, {
         description: Strings.DESCRIPTION_LIVEDEV_WEBSOCKET_PORT
+    });
+    
+    PreferencesManager.definePreference("livedev.enableReverseInspect", "boolean", true, {
+        description: Strings.DESCRIPTION_LIVEDEV_ENABLE_REVERSE_INSPECT
     });
 
     function _isPromisePending(promise) {
@@ -1346,6 +1351,13 @@ define(function LiveDevelopment(require, exports, module) {
                 });
             }
         }
+        // Send analytics data when Live Preview is opened
+        HealthLogger.sendAnalyticsData(
+            "livePreviewOpen",
+            "usage",
+            "livePreview",
+            "open"
+        );
 
         // Register user defined server provider and keep handlers for further clean-up
         _regServers.push(LiveDevServerManager.registerServer({ create: _createUserServer }, 99));
@@ -1369,7 +1381,12 @@ define(function LiveDevelopment(require, exports, module) {
             // wait for server (StaticServer, Base URL or file:)
             prepareServerPromise
                 .done(function () {
-                    WebSocketTransport.createWebSocketServer(PreferencesManager.get("livedev.wsPort"));
+                    var reverseInspectPref = PreferencesManager.get("livedev.enableReverseInspect"),
+                        wsPort             = PreferencesManager.get("livedev.wsPort");
+                        
+                    if (wsPort && reverseInspectPref) {
+                        WebSocketTransport.createWebSocketServer(wsPort);
+                    }
                     _doLaunchAfterServerReady(doc);
                 })
                 .fail(function () {

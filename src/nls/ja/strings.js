@@ -66,6 +66,9 @@ define({
 	"ERROR_RENAMING_FILE_TITLE": "{0} の名前を変更する際にエラーが発生しました。",
 	"ERROR_RENAMING_FILE": "{2} <span class='dialog-filename'>{0}</span> の名前を変更する際にエラーが発生しました。{1}",
 	"ERROR_RENAMING_NOT_IN_PROJECT": "ファイルまたはディレクトリが、現在開いているプロジェクトの一部ではありません。現時点で、プロジェクトファイルの名前のみを変更できます。",
+	"ERROR_MOVING_FILE_TITLE": "{0}の移動エラー",
+	"ERROR_MOVING_FILE": "{2} <span class='dialog-filename'>{0}</span> を移動する際にエラーが発生しました。{1}",
+	"ERROR_MOVING_NOT_IN_PROJECT": "現在のプロジェクトに含まれないため、ファイル/フォルダーを移動することはできません。",
 	"ERROR_DELETING_FILE_TITLE": "{0} を削除する際にエラーが発生しました。",
 	"ERROR_DELETING_FILE": "{2} <span class='dialog-filename'>{0}</span> を削除する際にエラーが発生しました。{1}",
 	"INVALID_FILENAME_TITLE": "無効な{0}",
@@ -138,6 +141,10 @@ define({
 	"EXT_MODIFIED_WARNING": "<span class='dialog-filename'>{0}</span> は {APP_NAME} 外のディスク上で変更されています。<br /><br />ファイルを保存し、これらの変更を上書きしますか？",
 	"EXT_MODIFIED_MESSAGE": "<span class='dialog-filename'>{0}</span> は {APP_NAME} 外のディスク上で変更されていますが、{APP_NAME} 内にも保存されていない変更があります。<br /><br />どちらのバージョンを保持しますか？",
 	"EXT_DELETED_MESSAGE": "<span class='dialog-filename'>{0}</span> は {APP_NAME} 外のディスク上で削除されていますが、{APP_NAME} 内に保存されていない変更があります。<br /><br />変更を保持しますか？",
+    
+    // Window unload warning messages
+	"WINDOW_UNLOAD_WARNING": "Are you sure you want to navigate to a different URL and leave Brackets?",
+	"WINDOW_UNLOAD_WARNING_WITH_UNSAVED_CHANGES": "You have unsaved changes! Are you sure you want to navigate to a different URL and leave Brackets?",
 
     // Generic dialog/button labels
 	"DONE": "完了",
@@ -156,7 +163,7 @@ define({
 	"FIND_NO_RESULTS": "該当なし",
 	"FIND_QUERY_PLACEHOLDER": "検索\u2026",
 	"FIND_HISTORY_MAX_COUNT": "検索履歴内の検索項目の最大数",
-	"REPLACE_PLACEHOLDER": "\u2026 に置換",
+	"REPLACE_PLACEHOLDER": " に置換\u2026",
 	"BUTTON_REPLACE_ALL": "すべて置換",
 	"BUTTON_REPLACE_BATCH": "バッチ\u2026",
 	"BUTTON_REPLACE_ALL_IN_FILES": "置換\u2026",
@@ -405,12 +412,14 @@ define({
 	"CMD_WORKINGSET_SORT_BY_TYPE": "種類順",
 	"CMD_WORKING_SORT_TOGGLE_AUTO": "自動ソート",
 	"CMD_THEMES": "テーマ\u2026",
+	"CMD_TOGGLE_SEARCH_AUTOHIDE": "検索を自動的に閉じる",
 
     // Navigate menu commands
 	"NAVIGATE_MENU": "ナビゲート",
 	"CMD_QUICK_OPEN": "クイックオープン",
 	"CMD_GOTO_LINE": "行に移動",
 	"CMD_GOTO_DEFINITION": "定義をクイック検索",
+	"CMD_GOTO_DEFINITION_PROJECT": "プロジェクトで定義をクイック検索",
 	"CMD_GOTO_FIRST_PROBLEM": "最初の問題に移動",
 	"CMD_TOGGLE_QUICK_EDIT": "クイック編集",
 	"CMD_TOGGLE_QUICK_DOCS": "クイックドキュメント",
@@ -449,6 +458,7 @@ define({
 	"EXPERIMENTAL_BUILD": "試験ビルド",
 	"RELEASE_BUILD": "ビルド",
 	"DEVELOPMENT_BUILD": "開発ビルド",
+	"PRERELEASE_BUILD": "プレリリースビルド",
 	"RELOAD_FROM_DISK": "ディスクから再読み込み",
 	"KEEP_CHANGES_IN_EDITOR": "エディター内の変更を保持する",
 	"CLOSE_DONT_SAVE": "保存せずに閉じる",
@@ -480,10 +490,10 @@ define({
 	"FLIPVIEW_BTN_TOOLTIP": "このビューを {0} ペインにめくる",
 
     // Strings for themes-settings.html and themes-general.html
-	"CURRENT_THEME": "現在のテーマ",
-	"USE_THEME_SCROLLBARS": "テーマスクロールバーを使用",
-	"FONT_SIZE": "フォントサイズ",
-	"FONT_FAMILY": "フォントファミリー",
+	"CURRENT_THEME": "現在のテーマ ",
+	"USE_THEME_SCROLLBARS": "テーマスクロールバーを使用 ",
+	"FONT_SIZE": "フォントサイズ ",
+	"FONT_FAMILY": "フォントファミリー ",
 	"THEMES_SETTINGS": "テーマ設定",
 
     // CSS Quick Edit
@@ -608,7 +618,7 @@ define({
 
     // extensions/default/DebugCommands
 	"DEBUG_MENU": "デバッグ",
-	"ERRORS": "エラー",
+	"ERRORS": "エラー ",
 	"CMD_SHOW_DEV_TOOLS": "開発者ツールを表示",
 	"CMD_REFRESH_WINDOW": "拡張機能付きでリロード",
 	"CMD_RELOAD_WITHOUT_USER_EXTS": "拡張機能なしでリロード",
@@ -641,10 +651,10 @@ define({
     // extensions/default/HealthData
 	"HEALTH_DATA_NOTIFICATION": "Health Report Preferences",
 	"HEALTH_FIRST_POPUP_TITLE": "{APP_NAME} の正常性レポート",
-	"HEALTH_DATA_DO_TRACK": "{APP_NAME} の使用方法に関する情報を匿名で共有します",
-	"HEALTH_DATA_NOTIFICATION_MESSAGE": "{APP_NAME} 品質向上のため、アドビでは、お客様の {APP_NAME} の使用方法に関する限られた<strong>匿名の</strong>統計をアドビに定期的に送信しています。この情報は、機能を優先順位付けし、バグを発見し、操作性の問題を検出する際に役立ちます。<br><br>お客様のデータを確認するには、または、データを共有しないように選択するには、<strong>ヘルプ／正常性レポート</strong>を選択してください。<br><br><a href='https://github.com/adobe/brackets/wiki/Health-Data'>{APP_NAME} の正常性レポートに関する詳細情報</a>",
+	"HEALTH_DATA_DO_TRACK": "{APP_NAME} の使用方法に関する偽名情報を共有します",
+	"HEALTH_DATA_NOTIFICATION_MESSAGE": "{APP_NAME} 品質向上のため、アドビでは、お客様の {APP_NAME} の使用方法に関する限られた<strong>偽名</strong>の統計をアドビに定期的に送信しています。この情報は、機能を優先順位付けし、バグを発見し、操作性の問題を検出する際に役立ちます。<br><br><strong>ヘルプ／正常性レポート</strong>から、お客様のデータの確認またはデータの非共有の選択をすることができます。<br><br><a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>{APP_NAME} の正常性レポートに関する詳細情報</a>",
 	"HEALTH_DATA_PREVIEW": "{APP_NAME} の正常性レポート",
-	"HEALTH_DATA_PREVIEW_INTRO": "<p>{APP_NAME} 品質向上のため、アドビでは、お客様の {APP_NAME} の使用方法に関する限られた<strong>匿名の</strong>統計をアドビに定期的に送信しています。この情報は、機能を優先順位付けし、バグを発見し、操作性の問題を検出する際に役立ちます。<a href='https://github.com/adobe/brackets/wiki/Health-Data'>{APP_NAME} の正常性レポート</a>について、またこれが {APP_NAME} コミュニティにどのように役立ち、プライバシーを保護するかついて詳細をご確認ください。</p><p>有効にした場合に、次回のお客様の正常性レポートで送信されるデータのプレビューを以下に示します。<em></em></p>",
+	"HEALTH_DATA_PREVIEW_INTRO": "<p>{APP_NAME} 品質向上のため、アドビでは、お客様の {APP_NAME} の使用方法に関する限られた<strong>偽名</strong>の統計をアドビに定期的に送信しています。この情報は、機能を優先順位付けし、バグを発見し、操作性の問題を検出する際に役立ちます。<a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>{APP_NAME} の正常性レポート</a>についての詳細およびレポートがお客様のプライバシーを保護した上でどのように {APP_NAME} コミュニティに役立つかをご確認ください。</p><p>有効にした場合に、次回のお客様の正常性レポートで送信されるデータのプレビューを以下に示します。<em></em> </p>",
 
     // extensions/default/InlineTimingFunctionEditor
 	"INLINE_TIMING_EDITOR_TIME": "時間",
@@ -669,6 +679,31 @@ define({
 	"NO_ARGUMENTS": "<パラメーターがありません>",
 	"DETECTED_EXCLUSION_TITLE": "JavaScript ファイルの推論問題",
 	"DETECTED_EXCLUSION_INFO": "{APP_NAME} で <span class='dialog-filename'>{0}</span> の処理中に問題が発生しました。<br><br>このファイルはコードヒント、定義にジャンプ、またはクイック編集では処理されません。このファイルを再度有効にするには、プロジェクトで <code>.brackets.json</code> を開いて <code>jscodehints.detectedExclusions</code> を編集してください。<br><br>これは、{APP_NAME} のバグである可能性があります。このファイルのコピーをご提供いただける場合は、ここで名付けたファイルへのリンクを記載して<a href='https://github.com/adobe/brackets/wiki/How-to-Report-an-Issue'>バグを登録</a>してください。",
+
+    // extensions/default/JavascriptRefactoring
+	"CMD_REFACTOR": "リファクタリング",
+	"CMD_EXTRACTTO_VARIABLE": "変数に抽出",
+	"CMD_EXTRACTTO_FUNCTION": "関数に抽出",
+	"ERROR_TERN_FAILED": "Tern からデータを取得できません",
+	"ERROR_EXTRACTTO_VARIABLE_NOT_VALID": "選択内容は式になっていません",
+	"ERROR_EXTRACTTO_FUNCTION_NOT_VALID": "選択したブロックは、ステートメントセットまたは式を表す必要があります",
+	"ERROR_EXTRACTTO_VARIABLE_MULTICURSORS": "変数に抽出は複数カーソルでは機能しません",
+	"ERROR_EXTRACTTO_FUNCTION_MULTICURSORS": "関数に抽出は複数カーソルでは機能しません",
+	"EXTRACTTO_FUNCTION_SELECT_SCOPE": "対象範囲を選択",
+	"EXTRACTTO_VARIABLE_SELECT_EXPRESSION": "式を選択",
+	"CMD_REFACTORING_RENAME": "ファイル名変更",
+	"CMD_REFACTORING_TRY_CATCH": "Try Catch で囲む",
+	"CMD_REFACTORING_CONDITION": "Condition で囲む",
+	"CMD_REFACTORING_GETTERS_SETTERS": "Getters Setters を作成",
+	"CMD_REFACTORING_ARROW_FUNCTION": "Arrow Function へ変換",
+	"DESCRIPTION_CODE_REFACTORING": "JavaScript のコードリファクタリングを有効化または無効化します",
+	"ERROR_TRY_CATCH": "有効なコードを選択して、Try-catch ブロックで囲みます",
+	"ERROR_WRAP_IN_CONDITION": "有効なコードを選択して、Condition ブロックで囲みます",
+	"ERROR_ARROW_FUNCTION": "関数式の中にカーソルを置きます",
+	"ERROR_GETTERS_SETTERS": "オブジェクト式のメンバーにカーソルを置きます",
+	"ERROR_RENAME_MULTICURSOR": "複数のカーソルを使用して名前を変更することはできません",
+	"ERROR_RENAME_QUICKEDIT": "この識別子は、この関数以外の場所で参照されているため名前変更できません",
+	"ERROR_RENAME_GENERAL": "選択したテキストの名前を変更できません",
 
     // extensions/default/JSLint
 	"JSLINT_NAME": "JSLint",
@@ -784,6 +819,7 @@ define({
 	"DESCRIPTION_USE_TAB_CHAR": "スペースの代わりにタブを使用するには true",
 	"DESCRIPTION_UPPERCASE_COLORS": "Inline Color Editor で大文字の 16 進カラーを生成するには true",
 	"DESCRIPTION_WORD_WRAP": "ビューポートの幅を超える行を折り返す",
+	"DESCRIPTION_SEARCH_AUTOHIDE": "エディターがフォーカスされるとすぐに検索を閉じる",
 	"DESCRIPTION_DETECTED_EXCLUSIONS": "Tern が制御不能になる原因として検出されたファイルの一覧",
 	"DESCRIPTION_INFERENCE_TIMEOUT": "ファイルの認識時に Tern がタイムアウトするまでの時間",
 	"DESCRIPTION_SHOW_ERRORS_IN_STATUS_BAR": "ステータスバーにエラーを表示するには true",
@@ -807,5 +843,74 @@ define({
 	"DESCRIPTION_INDENT_LINE_COMMENT": "行コメントのインデントを有効にするには true",
 	"DESCRIPTION_RECENT_FILES_NAV": "最近使用したファイルのナビゲーションを有効化/無効化",
 	"DESCRIPTION_LIVEDEV_WEBSOCKET_PORT": "ライブプレビューで WebSocket サーバーが実行されるポート",
-	"DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS": "ライブプレビューハイライト設定"
+	"DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS": "ライブプレビューハイライト設定",
+	"DESCRIPTION_LIVEDEV_ENABLE_REVERSE_INSPECT": "false にすると、ライブプレビューでのリバースインスペクトが無効になります",
+    
+    // Strings for Auto Update
+	"DOWNLOAD_FAILED": "ダウンロードに失敗しました。",
+	"DOWNLOAD_COMPLETE": "ダウンロードが完了しました。",
+	"UPDATE_SUCCESSFUL": "アップデートが正常に完了しました。",
+	"UPDATE_FAILED": "アップデートに失敗しました。",
+	"VALIDATION_FAILED": "検証に失敗しました。",
+	"INITIALISATION_FAILED": "初期化に失敗しました。",
+	"CLEANUP_FAILED": "クリーンアップに失敗しました。",
+	"WARNING_TYPE": "警告",
+	"CLICK_RESTART_TO_UPDATE": "Brackets をアップデートするには、「再起動」をクリックしてください。",
+	"UPDATE_ON_NEXT_LAUNCH": "アップデートは再起動時に適用されます。",
+	"GO_TO_SITE": "<a href=\"http://brackets.io/\">brackets.io</a> に移動して、再試行します。",
+	"INTERNET_UNAVAILABLE": "インターネットに接続されていません.",
+	"UPDATEDIR_READ_FAILED": "アップデートディレクトリを読み込めませんでした。",
+	"UPDATEDIR_CLEAN_FAILED": "アップデートディレクトリを空にできませんでした。",
+	"INITIAL_DOWNLOAD": "アップデートをダウンロード中...",
+	"RETRY_DOWNLOAD": "ダウンロードに失敗しました。再試行...試行",
+	"VALIDATING_INSTALLER": "ダウンロードが完了しました。インストーラーを検証中...",
+	"CHECKSUM_DID_NOT_MATCH": "チェックサムが一致しませんでした。",
+	"INSTALLER_NOT_FOUND": "インストーラーが見つかりません。",
+	"DOWNLOAD_ERROR": "ダウンロード中にエラーが発生しました。",
+	"NETWORK_SLOW_OR_DISCONNECTED": "ネットワーク接続がないか速度が遅すぎます。",
+	"RESTART_BUTTON": "再起動",
+	"LATER_BUTTON": "後で再起動",
+	"DESCRIPTION_AUTO_UPDATE": "Brackets の自動更新を有効化/無効化",
+	"AUTOUPDATE_ERROR": "エラー!",
+	"AUTOUPDATE_IN_PROGRESS": "更新は既に進行中です。",
+
+	"NUMBER_WITH_PERCENTAGE": "{0}%",
+    // Strings for Related Files
+	"CMD_FIND_RELATED_FILES": "関連するファイルを検索",
+
+    ///String for Php Tooling Extensions
+	"PHP_VERSION_INVALID": "PHP バージョンを解析する際のエラーです。“php –version” コマンドの出力を確認してください。",
+	"PHP_UNSUPPORTED_VERSION": "コードヒント、パラメーターヒント、定義にジャンプなどの PHP 関連のツールを有効化するために、PHP7 ランタイムをインストールしてください。検出されたバージョン: {0}",
+	"PHP_EXECUTABLE_NOT_FOUND": "PHP ランタイムが見つかりません。PHP7 ランタイムをインストールして、PHP の環境設定で適切に “executablePath” を更新してください。これにより、コードヒント、パラメーターヒント、定義にジャンプなどの PHP 関連のツールが有効になります。",
+	"PHP_PROCESS_SPAWN_ERROR": "PHP プロセスを起動中に、エラーコード {0} が発生しました。",
+	"PHP_SERVER_ERROR_TITLE": "エラー",
+	"PHP_SERVER_MEMORY_LIMIT_INVALID": "指定したメモリ制限は無効です。正しい値を設定するために、PHP の環境設定を確認してください。",
+	"DESCRIPTION_PHP_TOOLING_CONFIGURATION": "PHP ツールのデフォルト設定",
+	"OPEN_PREFERENNCES": "環境設定を開く",
+
+    //Strings for LanguageTools Preferences
+	"LANGUAGE_TOOLS_PREFERENCES": "言語ツールの設定",
+
+	"FIND_ALL_REFERENCES": "すべての参照を検索",
+	"REFERENCES_IN_FILES": "参照",
+	"REFERENCE_IN_FILES": "参照",
+	"REFERENCES_NO_RESULTS": "現在のカーソル位置で利用可能な参照はありません",
+
+	"CMD_FIND_DOCUMENT_SYMBOLS": "ドキュメント記号を検索",
+	"CMD_FIND_PROJECT_SYMBOLS": "プロジェクト記号を検索",
+
+   // Remote debugging enabled
+	"REMOTE_DEBUGGING_ENABLED": "次のローカルホストでリモートデバッグが有効になりました。localhost:",
+
+   // Remote debugging port argument is invalid
+	"REMOTE_DEBUGGING_PORT_INVALID": "ポート {0} でリモートデバッグを有効にできません。ポート番号は、{1} から {2} の間で指定してください。",
+    
+    //Associate File Type to External App
+	"DESCRIPTION_EXTERNAL_APPLICATION_ASSOCIATE": "ファイル拡張子の外部アプリケーションへのマッピング。構文: \"<file_type>\": \"<default|applicationName|ApplicationPath>\"。「default」を指定すると、そのファイルタイプに対してシステムでデフォルトに設定されているアプリケーションを使用してファイルが開きます。",
+
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_TITLE": "外部エディターでグラフィックファイルを開きます。",
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_MSG": "現在のフォルダーには、{APP_NAME}でサポートされていないタイプのグラフィックファイルがあります。<br/>ここで、特定のファイルタイプを外部エディターに関連付けることができます。関連付けが完了すると、xd、.psd、.jpg、.png、.ai、.svgなどのグラフィックファイルをファイルツリーでダブルクリックすることで、デフォルトのアプリケーションで開くことができます。<br/><br/>「OK」ボタンをクリックして、グラフィックファイルタイプをそれぞれのデフォルトアプリケーションに関連付けてください。",
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_CNF_MSG": "次のファイルタイプが、デフォルトのアプリケーションに関連付けられました。<br/>{0} この設定は、brackets.json でファイルタイプの関連付けを削除し、新しい関連付けを追加するか、デバッグ／環境設定ファイルを開くメニューにアクセスして変更できます。"
+
+
 });

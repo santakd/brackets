@@ -50,6 +50,16 @@ module.exports = function (grunt) {
                         'src/styles/brackets.css'
                     ]
                 }]
+            },
+            node_modules_test_dir : {
+                files: [{
+                    dot: true,
+                    src: [
+                        'dist/node_modules/npm/test/fixtures',
+                        'dist/node_modules/npm/node_modules/tar/test',
+                        'dist/node_modules/npm/node_modules/npm-registry-client/test'
+                    ]
+                }]
             }
         },
         copy: {
@@ -81,6 +91,10 @@ module.exports = function (grunt) {
                         cwd: 'src/',
                         src: [
                             'extensibility/node/**',
+                            'JSUtils/node/**',
+                            'languageTools/node/**',
+                            'languageTools/styles/**',
+                            'languageTools/LanguageClient/**',
                             '!extensibility/node/spec/**',
                             '!extensibility/node/node_modules/**/{test,tst}/**/*',
                             '!extensibility/node/node_modules/**/examples/**/*',
@@ -376,7 +390,13 @@ module.exports = function (grunt) {
     });
 
     // task: install
-    grunt.registerTask('install', ['write-config:dev', 'less', 'npm-install-source', 'pack-web-dependencies']);
+    grunt.registerTask('install', [
+        'write-config:dev',
+        'less',
+        'npm-download-default-extensions',
+        'npm-install-source',
+        'pack-web-dependencies'
+    ]);
 
     // task: test
     grunt.registerTask('test', ['eslint', 'jasmine', 'nls-check']);
@@ -386,9 +406,7 @@ module.exports = function (grunt) {
     // Update version number in package.json and rewrite src/config.json
     grunt.registerTask('set-release', ['update-release-number', 'write-config:dev']);
 
-    // task: build
-    grunt.registerTask('build', [
-        'write-config:dist',
+    grunt.registerTask('build-common', [
         'eslint:src',
         'jasmine',
         'clean',
@@ -404,9 +422,23 @@ module.exports = function (grunt) {
         'npm-install',
         'cleanempty',
         'usemin',
-        'build-config'
+        'build-config',
+        'clean:node_modules_test_dir'
+    ]);
+
+    // task: build
+    grunt.registerTask('build', [
+        'write-config:dist',
+        'build-common'
+    ]);
+
+    // task: build
+    grunt.registerTask('build-prerelease', [
+        'write-config:prerelease',
+        'build-common'
     ]);
 
     // Default task.
     grunt.registerTask('default', ['test']);
 };
+

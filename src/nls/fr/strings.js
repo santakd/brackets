@@ -66,6 +66,9 @@ define({
 	"ERROR_RENAMING_FILE_TITLE": "Erreur lors du changement de nom du {0}",
 	"ERROR_RENAMING_FILE": "Une erreur s’est produite lors de la tentative de changement de nom du {2} <span class='dialog-filename'>{0}</span>. {1}",
 	"ERROR_RENAMING_NOT_IN_PROJECT": "Le fichier ou le répertoire ne fait pas partie du projet actuellement ouvert. Or, seuls les fichiers appartenant au projet peuvent être renommés à ce stade.",
+	"ERROR_MOVING_FILE_TITLE": "Erreur lors du déplacement de l’élément {0}",
+	"ERROR_MOVING_FILE": "Une erreur s’est produite lors du déplacement de l’élément {2} <span class='dialog-filename'>{0}</span>. {1}",
+	"ERROR_MOVING_NOT_IN_PROJECT": "Impossible de déplacer le fichier/dossier, car ils ne font pas partie du projet en cours.",
 	"ERROR_DELETING_FILE_TITLE": "Erreur lors de la suppression du {0}",
 	"ERROR_DELETING_FILE": "Une erreur s’est produite lors de la tentative de suppression du {2} <span class='dialog-filename'>{0}</span>. {1}",
 	"INVALID_FILENAME_TITLE": "{0} non valide",
@@ -138,6 +141,10 @@ define({
 	"EXT_MODIFIED_WARNING": "<span class='dialog-filename'>{0}</span> a été modifié sur le disque, dans une application autre que {APP_NAME}.<br /><br />Voulez-vous enregistrer le fichier et remplacer ces modifications ?",
 	"EXT_MODIFIED_MESSAGE": "Le fichier <span class='dialog-filename'>{0}</span> a été modifié sur le disque dans une autre application que {APP_NAME} mais présente également des modifications non enregistrées dans {APP_NAME}.<br /><br />Quelle version souhaitez-vous conserver ?",
 	"EXT_DELETED_MESSAGE": "Le fichier <span class='dialog-filename'>{0}</span> a été supprimé du disque dans une autre application que {APP_NAME} mais présente également des modifications non enregistrées dans {APP_NAME}.<br /><br />Souhaitez-vous conserver vos modifications ?",
+    
+    // Window unload warning messages
+	"WINDOW_UNLOAD_WARNING": "Are you sure you want to navigate to a different URL and leave Brackets?",
+	"WINDOW_UNLOAD_WARNING_WITH_UNSAVED_CHANGES": "You have unsaved changes! Are you sure you want to navigate to a different URL and leave Brackets?",
 
     // Generic dialog/button labels
 	"DONE": "Terminé",
@@ -405,12 +412,14 @@ define({
 	"CMD_WORKINGSET_SORT_BY_TYPE": "Trier par type",
 	"CMD_WORKING_SORT_TOGGLE_AUTO": "Tri automatique",
 	"CMD_THEMES": "Thèmes\u2026",
+	"CMD_TOGGLE_SEARCH_AUTOHIDE": "Fermer automatiquement la recherche",
 
     // Navigate menu commands
 	"NAVIGATE_MENU": "Naviguer",
 	"CMD_QUICK_OPEN": "Ouverture rapide",
 	"CMD_GOTO_LINE": "Atteindre la ligne",
 	"CMD_GOTO_DEFINITION": "Accès rapide à la définition",
+	"CMD_GOTO_DEFINITION_PROJECT": "Accès rapide à la définition dans le projet",
 	"CMD_GOTO_FIRST_PROBLEM": "Accéder au premier problème",
 	"CMD_TOGGLE_QUICK_EDIT": "Édition rapide",
 	"CMD_TOGGLE_QUICK_DOCS": "Documentation rapide",
@@ -449,6 +458,7 @@ define({
 	"EXPERIMENTAL_BUILD": "version expérimentale",
 	"RELEASE_BUILD": "édition",
 	"DEVELOPMENT_BUILD": "version de développement",
+	"PRERELEASE_BUILD": "version préliminaire",
 	"RELOAD_FROM_DISK": "Recharger à partir du disque",
 	"KEEP_CHANGES_IN_EDITOR": "Conserver les modifications dans l’éditeur",
 	"CLOSE_DONT_SAVE": "Fermer (sans enregistrer)",
@@ -608,7 +618,7 @@ define({
 
     // extensions/default/DebugCommands
 	"DEBUG_MENU": "Déboguer",
-	"ERRORS": "Erreurs",
+	"ERRORS": "Erreurs ",
 	"CMD_SHOW_DEV_TOOLS": "Afficher les outils de développement",
 	"CMD_REFRESH_WINDOW": "Recharger avec les extensions",
 	"CMD_RELOAD_WITHOUT_USER_EXTS": "Recharger sans les extensions",
@@ -641,10 +651,10 @@ define({
     // extensions/default/HealthData
 	"HEALTH_DATA_NOTIFICATION": "Health Report Preferences",
 	"HEALTH_FIRST_POPUP_TITLE": "Rapport d’intégrité de {APP_NAME}",
-	"HEALTH_DATA_DO_TRACK": "Partager des informations anonymes sur la façon dont j’utilise {APP_NAME}",
-	"HEALTH_DATA_NOTIFICATION_MESSAGE": "<p>Afin d’améliorer {APP_NAME}, nous transmettons régulièrement des statistiques limitées et <strong>anonymes</strong> à Adobe sur la manière dont vous utilisez {APP_NAME}. Ces données permettent de hiérarchiser les fonctionnalités à traiter, de détecter les bugs éventuels et d’identifier les problèmes d’utilisation.<br><br>Pour voir les renseignements collectés et choisir ceux que vous ne souhaitez pas partager, cliquez sur <strong>Aide > Rapport d’intégrité</strong>.<br><br><a href='https://github.com/adobe/brackets/wiki/Health-Data'>Lisez cet article pour en savoir plus concernant le rapport d’intégrité de {APP_NAME}</a>",
+	"HEALTH_DATA_DO_TRACK": "Partager des informations pseudonymes sur la façon dont j’utilise {APP_NAME}",
+	"HEALTH_DATA_NOTIFICATION_MESSAGE": "Afin d’améliorer {APP_NAME}, nous transmettons régulièrement des statistiques limitées et <strong>pseudonymes</strong> à Adobe sur la manière dont vous utilisez {APP_NAME}. Ces données permettent de hiérarchiser les fonctionnalités à traiter, de détecter les bugs éventuels et d’identifier les problèmes d’utilisation.<br><br>Pour voir les renseignements collectés et choisir ceux que vous ne souhaitez pas partager, cliquez sur <strong>Aide > Rapport d’intégrité</strong>.<br><br><a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>Lisez cet article pour en savoir plus concernant le rapport d’intégrité de {APP_NAME}</a>",
 	"HEALTH_DATA_PREVIEW": "Rapport d’intégrité de {APP_NAME}",
-	"HEALTH_DATA_PREVIEW_INTRO": "<p>Afin d’améliorer {APP_NAME}, nous transmettons régulièrement des statistiques limitées et <strong>anonymes</strong> à Adobe sur la manière dont vous utilisez {APP_NAME}. Ces données permettent de hiérarchiser les fonctionnalités à traiter, de détecter les bugs éventuels et d’identifier les problèmes d’utilisation. <a href='https://github.com/adobe/brackets/wiki/Health-Data'>Lisez cet article concernant le rapport d’intégrité de {APP_NAME}</a> et découvrez en quoi il est utile à la communauté {APP_NAME} tout en préservant votre confidentialité.</p><p>Vous trouverez ci-dessous un résumé des données qui seront envoyées dans le cadre de votre prochain rapport d’intégrité <em>si</em> vous décidez d’activer cette option.</p>",
+	"HEALTH_DATA_PREVIEW_INTRO": "<p>Afin d’améliorer {APP_NAME}, nous transmettons régulièrement des statistiques limitées et <strong>pseudonymes</strong> à Adobe sur la manière dont vous utilisez {APP_NAME}. Ces données permettent de hiérarchiser les fonctionnalités à traiter, de détecter les bugs éventuels et d’identifier les problèmes d’utilisation. <a href='https://github.com/adobe/brackets/wiki/Project-Health-Data'>Lisez cet article concernant le rapport d’intégrité de {APP_NAME}</a> et découvrez en quoi il est utile à la communauté {APP_NAME} tout en préservant votre confidentialité.</p><p>Vous trouverez ci-dessous un résumé des données qui seront envoyées dans le cadre de votre prochain rapport d’intégrité <em>si</em> vous décidez d’activer cette option.</p>",
 
     // extensions/default/InlineTimingFunctionEditor
 	"INLINE_TIMING_EDITOR_TIME": "Temps",
@@ -669,6 +679,31 @@ define({
 	"NO_ARGUMENTS": "<aucun paramètre>",
 	"DETECTED_EXCLUSION_TITLE": "Problème d’inférence de fichier Javascript",
 	"DETECTED_EXCLUSION_INFO": "{APP_NAME} a rencontré des problèmes lors du traitement du fichier <span class='dialog-filename'>{0}</span>.<br><br>La fonction d’accès aux définitions, les indicateurs de code et la fonction Edition rapide de ce fichier ne seront plus traités. Pour réactiver ce fichier, ouvrez <code>.brackets.json</code> dans votre projet et éditez la section <code>jscodehints.detectedExclusions</code>.<br><br>Il s’agit vraisemblablement d’un bug au niveau de l’application {APP_NAME}. Si vous pouvez nous transmettre une copie de ce fichier, merci de <a href='https://github.com/adobe/brackets/wiki/How-to-Report-an-Issue'>consigner un bug</a> en fournissant un lien vers le fichier en question.",
+
+    // extensions/default/JavascriptRefactoring
+	"CMD_REFACTOR": "Remanier",
+	"CMD_EXTRACTTO_VARIABLE": "Extraire vers variable",
+	"CMD_EXTRACTTO_FUNCTION": "Extraire vers fonction",
+	"ERROR_TERN_FAILED": "Impossible d’obtenir des données depuis Tern",
+	"ERROR_EXTRACTTO_VARIABLE_NOT_VALID": "La sélection ne forme pas une expression",
+	"ERROR_EXTRACTTO_FUNCTION_NOT_VALID": "Le bloc sélectionné doit représenter un ensemble d’instructions ou une expression",
+	"ERROR_EXTRACTTO_VARIABLE_MULTICURSORS": "L’option Extraire vers variable ne fonctionne pas en cas de curseurs multiples",
+	"ERROR_EXTRACTTO_FUNCTION_MULTICURSORS": "L’option Extraire vers fonction ne fonctionne pas en cas de curseurs multiples",
+	"EXTRACTTO_FUNCTION_SELECT_SCOPE": "Choisir la portée cible",
+	"EXTRACTTO_VARIABLE_SELECT_EXPRESSION": "Sélectionner une expression",
+	"CMD_REFACTORING_RENAME": "Renommer",
+	"CMD_REFACTORING_TRY_CATCH": "Encapsuler dans Try/Catch",
+	"CMD_REFACTORING_CONDITION": "Encapsuler dans Condition",
+	"CMD_REFACTORING_GETTERS_SETTERS": "Créer des getters/setters",
+	"CMD_REFACTORING_ARROW_FUNCTION": "Convertir en fonction de flèche",
+	"DESCRIPTION_CODE_REFACTORING": "Activer/désactiver le remaniement de code JavaScript",
+	"ERROR_TRY_CATCH": "Sélectionner un code valide à encapsuler dans un bloc Try/Catch",
+	"ERROR_WRAP_IN_CONDITION": "Sélectionner un code valide à encapsuler dans un bloc Condition",
+	"ERROR_ARROW_FUNCTION": "Placer le curseur à l’intérieur d’une expression de fonction",
+	"ERROR_GETTERS_SETTERS": "Placer le curseur au niveau d’un membre d’une expression d’objet",
+	"ERROR_RENAME_MULTICURSOR": "Impossible de renommer en cas d’utilisation de plusieurs curseurs",
+	"ERROR_RENAME_QUICKEDIT": "Impossible de renommer cet identifiant, car il est référencé ailleurs en dehors de cette fonction.",
+	"ERROR_RENAME_GENERAL": "Impossible de renommer le texte sélectionné",
 
     // extensions/default/JSLint
 	"JSLINT_NAME": "JSLint",
@@ -784,6 +819,7 @@ define({
 	"DESCRIPTION_USE_TAB_CHAR": "vrai pour utiliser des tabulations au lieu d’espaces",
 	"DESCRIPTION_UPPERCASE_COLORS": "vrai pour générer des couleurs hexadécimales en majuscules dans l’éditeur de couleur intégré",
 	"DESCRIPTION_WORD_WRAP": "Renvoyer à la ligne automatiquement en cas de dépassement de la largeur de la fenêtre",
+	"DESCRIPTION_SEARCH_AUTOHIDE": "Fermer la recherche dès que l’éditeur redevient actif",
 	"DESCRIPTION_DETECTED_EXCLUSIONS": "Liste de fichiers qui ont été identifiés comme provoquant une perte de contrôle de Tern",
 	"DESCRIPTION_INFERENCE_TIMEOUT": "Laps de temps au bout duquel le processus Tern expire quand il tente d’interpréter des fichiers",
 	"DESCRIPTION_SHOW_ERRORS_IN_STATUS_BAR": "vrai pour afficher les erreurs dans la barre d’état",
@@ -807,5 +843,74 @@ define({
 	"DESCRIPTION_INDENT_LINE_COMMENT": "vrai pour activer la mise en retrait des commentaires sur une ligne",
 	"DESCRIPTION_RECENT_FILES_NAV": "Activer/désactiver la navigation dans les fichiers récents",
 	"DESCRIPTION_LIVEDEV_WEBSOCKET_PORT": "Port sur lequel s’exécute le serveur WebSocket pour le mode Aperçu en direct",
-	"DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS": "Paramètres de surbrillance de l'Aperçu en direct"
+	"DESCRIPTION_LIVE_DEV_HIGHLIGHT_SETTINGS": "Paramètres de surbrillance de l'Aperçu en direct",
+	"DESCRIPTION_LIVEDEV_ENABLE_REVERSE_INSPECT": "faux pour désactiver l’inspection inverse de l’Aperçu en direct",
+    
+    // Strings for Auto Update
+	"DOWNLOAD_FAILED": "Échec du téléchargement.",
+	"DOWNLOAD_COMPLETE": "Téléchargement terminé.",
+	"UPDATE_SUCCESSFUL": "Mise à jour effectuée.",
+	"UPDATE_FAILED": "Échec de la mise à jour.",
+	"VALIDATION_FAILED": "Échec de la validation.",
+	"INITIALISATION_FAILED": "Échec de l’initialisation.",
+	"CLEANUP_FAILED": "Échec du nettoyage.",
+	"WARNING_TYPE": "Avertissement !",
+	"CLICK_RESTART_TO_UPDATE": "Cliquez sur Redémarrer pour mettre à jour Brackets.",
+	"UPDATE_ON_NEXT_LAUNCH": "La mise à jour sera appliquée au prochain lancement de l’application.",
+	"GO_TO_SITE": "Rendez-vous sur <a href=\"http://brackets.io/\"> brackets.io </a> pour réessayer.",
+	"INTERNET_UNAVAILABLE": "Aucune connexion Internet disponible.",
+	"UPDATEDIR_READ_FAILED": "Impossible de lire le répertoire de mise à jour.",
+	"UPDATEDIR_CLEAN_FAILED": "Impossible de nettoyer le répertoire de mise à jour.",
+	"INITIAL_DOWNLOAD": "Téléchargement de la mise à jour...",
+	"RETRY_DOWNLOAD": "Échec du téléchargement. Nouvelle tentative... ",
+	"VALIDATING_INSTALLER": "Téléchargement terminé. Validation du programme d’installation...",
+	"CHECKSUM_DID_NOT_MATCH": "La somme de contrôle ne correspond pas.",
+	"INSTALLER_NOT_FOUND": "Programme d’installation non trouvé.",
+	"DOWNLOAD_ERROR": "Erreur lors du téléchargement.",
+	"NETWORK_SLOW_OR_DISCONNECTED": "Le réseau est déconnecté ou trop lent.",
+	"RESTART_BUTTON": "Recommencer",
+	"LATER_BUTTON": "Plus tard",
+	"DESCRIPTION_AUTO_UPDATE": "Activer/désactiver la mise à jour automatique de Brackets",
+	"AUTOUPDATE_ERROR": "Erreur !",
+	"AUTOUPDATE_IN_PROGRESS": "Une mise à jour est déjà en cours.",
+
+	"NUMBER_WITH_PERCENTAGE": "{0} %",
+    // Strings for Related Files
+	"CMD_FIND_RELATED_FILES": "Trouver les fichiers associés",
+
+    ///String for Php Tooling Extensions
+	"PHP_VERSION_INVALID": "Erreur lors de l’analyse de la version de PHP. Veuillez vérifier la sortie de la commande « php –version ».",
+	"PHP_UNSUPPORTED_VERSION": "Installez le moteur d’exécution de PHP 7 pour activer les outils correspondants comme Conseils de code, Conseils de paramètres, Accéder à la définition, etc. Version trouvée : {0}",
+	"PHP_EXECUTABLE_NOT_FOUND": "Moteur d’exécution PHP introuvable. Installez le moteur d’exécution de PHP 7 et mettez à jour « executablePath » dans les préférences PHP. Cela permettra l’activation des outils liés à PHP comme Conseils de code, Conseils de paramètres ou encore Accéder à la définition.",
+	"PHP_PROCESS_SPAWN_ERROR": "Code d’erreur {0} rencontré lors du démarrage du processus PHP.",
+	"PHP_SERVER_ERROR_TITLE": "Erreur",
+	"PHP_SERVER_MEMORY_LIMIT_INVALID": "La limite de mémoire que vous avez fournie n’est pas valide. Veuillez corriger la valeur indiquée dans les préférences PHP.",
+	"DESCRIPTION_PHP_TOOLING_CONFIGURATION": "Paramètres de configuration par défaut des outils PHP",
+	"OPEN_PREFERENNCES": "Ouvrir les préférences",
+
+    //Strings for LanguageTools Preferences
+	"LANGUAGE_TOOLS_PREFERENCES": "Préférences pour les outils linguistiques",
+
+	"FIND_ALL_REFERENCES": "Rechercher toutes les références",
+	"REFERENCES_IN_FILES": "références",
+	"REFERENCE_IN_FILES": "référence",
+	"REFERENCES_NO_RESULTS": "Références non disponibles pour la position actuelle du curseur",
+
+	"CMD_FIND_DOCUMENT_SYMBOLS": "Rechercher des symboles de document",
+	"CMD_FIND_PROJECT_SYMBOLS": "Rechercher des symboles de projet",
+
+   // Remote debugging enabled
+	"REMOTE_DEBUGGING_ENABLED": "Débogage à distance activé sur localhost:",
+
+   // Remote debugging port argument is invalid
+	"REMOTE_DEBUGGING_PORT_INVALID": "Impossible d’activer le débogage à distance sur le port {0}. Les numéros de port doivent être compris entre {1} et {2}.",
+    
+    //Associate File Type to External App
+	"DESCRIPTION_EXTERNAL_APPLICATION_ASSOCIATE": "Mappages d’extension de fichier avec des applications externes. Syntaxe : \"<type_fichier>\": \"<default|NomApplication|CheminApplication>\", Utiliser « default » pour ouvrir les fichiers dans l’application par défaut du système pour le type de fichier.",
+
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_TITLE": "Ouvrez les fichiers graphiques dans des éditeurs externes.",
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_MSG": "Votre dossier actuel comporte des types de fichier graphique non pris en charge par {APP_NAME}.<br/>Vous pouvez à présent associer des types de fichiers spécifiques avec des éditeurs externes. Une fois l’association établie, vous pouvez ouvrir des fichiers graphiques tels que .xd, .psd, .jpg, .png, .ai et .svg, dans leur application par défaut en double-cliquant sur ces fichiers dans l’arborescence de fichiers.<br/><br/>Cliquez sur le bouton OK pour associer les types de fichier graphique avec leur application par défaut respective.",
+	"ASSOCIATE_GRAPHICS_FILE_TO_DEFAULT_APP_CNF_MSG": "Les types de fichiers suivants ont été associés à des applications par défaut.<br/>{0} Vous pouvez modifier votre préférence concernant l’éventuel(le) suppression/ajout d’associations de type de fichier dans brackets.json via le menu Déboguer->Ouvrir le fichier des préférences."
+
+
 });

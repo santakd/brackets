@@ -39,6 +39,12 @@ require.config({
         "preact-test-utils"             : "thirdparty/preact-test-utils/preact-test-utils",
         "simulate-event"                : "thirdparty/simulate-event/simulate-event",
         "xtend"                         : "thirdparty/xtend"
+    },
+    map: {
+        "*": {
+            "thirdparty/preact"            : "preact-compat",
+            "thirdparty/preact-test-utils" : "preact-test-utils"
+        }
     }
 });
 
@@ -67,6 +73,9 @@ define(function (require, exports, module) {
     require("utils/NodeDomain");
     require("utils/ColorUtils");
     require("preferences/PreferencesBase");
+    require("JSUtils/Session");
+    require("JSUtils/ScopeManager");
+    require("widgets/InlineMenu");
 
     // Load modules that self-register and just need to get included in the test-runner window
     require("document/ChangedDocumentTracker");
@@ -93,6 +102,18 @@ define(function (require, exports, module) {
     require("thirdparty/CodeMirror/addon/mode/overlay");
     require("thirdparty/CodeMirror/addon/search/searchcursor");
     require("thirdparty/CodeMirror/keymap/sublime");
+    
+    //load Language Tools Module
+    require("languageTools/PathConverters");
+    require("languageTools/LanguageTools");
+    require("languageTools/ClientLoader");
+    require("languageTools/BracketsToNodeInterface");
+    require("languageTools/DefaultProviders");
+    require("languageTools/DefaultEventHandlers");
+
+	//load language features
+    require("features/ParameterHintsManager");
+    require("features/JumpToDefManager");
 
     var selectedSuites,
         params          = new UrlParams(),
